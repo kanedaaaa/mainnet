@@ -1,0 +1,16 @@
+{
+  "name": "mainnet",
+  "version": "0.0.0",
+  "description": "hub to deploy ML and possibly DL models",
+  "main": "dist/index.js",
+  "repository": "https://github.com/kanedaaaa/mainnet.git",
+  "author": "kata",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.10.4",
+    "typescript": "^5.3.3"
+  },
+  "scripts": {
+    "dev": "tsc && node dist/index.js"
+  }
+}
