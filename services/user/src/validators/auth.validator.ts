@@ -5,6 +5,7 @@ async function validateAuth(method: any, input: any) {
   switch (method) {
     case "signup": {
       const schema = joi.object({
+        username: joi.string().required(),
         email: joi.string().email().required(),
         password: joi.string().min(6).required(),
         fullName: joi.string().required(),

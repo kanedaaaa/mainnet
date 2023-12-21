@@ -14,10 +14,92 @@ Running pre-trained deep learning models is expensive unless there is a platform
 
 It is not a platform to train models, or share and version control source code for given models, this is too complex to maintain and nevertheless, there are tons of platforms for it, including the hugging face. aim of this project is to have rather a more marketized approach, if this even makes sense, basically, a place where people can monetize or make their models accessible to others.
 
-## Early project structure
+## API Reference
 
-It's a microservice design, so all the code can be found in the `services` dir, each service is self-contained, for now only `user` service will be available as it's starting point. It will contain authentication, profile management, etc. Other services will be added as the project progresses.
+**Base URL**: `https://non-existent-url.com/api/v1/`
+**Gateway PORT**: 4000
+**User Service PORT**: 3000
 
-For DB, it will be same one for every service, but i will try to isolate data in schemas as much as possible and have loose coupling between the services. 
+## User Service `/user`
 
-Prisma as ORM obviously, why would i have horrible time with typeorm or smth. And docker will be main player i suppose for every deployment, from project itself to models. 
+### Auth `/auth`
+
+### Signup
+
+**Method**: `POST`
+**URL**: `/signup`
+**Body**:
+
+```json
+{
+  "username": "username",
+  "password": "password",
+  "email": "email",
+  "fullname": "fullname",
+  "bio": "bio"
+}
+```
+
+**Response 200**:
+
+```json
+{
+  "message": "User created successfully"
+}
+```
+
+### Login
+
+**Method**: `POST`
+**URL**: `/login`
+**Body**:
+
+```json
+{
+  "username": "username",
+  "password": "password"
+}
+```
+
+**Response 200**
+```json
+{
+    "token": "token" // JWT token for dev purposes
+}
+```
+
+## Error Classes
+
+Every error class comes with default object:
+```json
+{
+    "message": "message",
+    "error": "error" // optional
+}
+```
+
+Every error `message` can be safely wrapped in alert on client,
+but **500** will probably require something more descriptive. It's
+the kind of error that can not be revealed to the client.
+
+**NotFoundError** - 404
+
+*Requesting a resource that does not exist*
+
+**ConflictError** - 409
+
+*Trying to create a resource that already exists*
+
+**ValidationError** - 400
+
+*Request body is not valid*
+
+**UnauthorizedError** - 401
+
+*Trying to access a protected resource without authorization*
+
+**AssertionError** - 500
+
+*Internal server error*
+
+

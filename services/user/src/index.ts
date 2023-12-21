@@ -1,3 +1,4 @@
+import { lstat } from "fs";
 import authRouter from "./routers/auth.router";
 import express from "express";
 

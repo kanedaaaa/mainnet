@@ -13,7 +13,7 @@ app.get(`/ping`, (req, res) => {
 })
 
 app.use('/api/v1/user', createProxyMiddleware({
-    target: 'http://localhost:3000',
+    target: USER_SERVICE_URL,
     changeOrigin: true,
     pathRewrite: {
         '^/api/v1/user': '/'  
