@@ -14,10 +14,12 @@ Running pre-trained deep learning models is expensive unless there is a platform
 
 It is not a platform to train models, or share and version control source code for given models, this is too complex to maintain and nevertheless, there are tons of platforms for it, including the hugging face. aim of this project is to have rather a more marketized approach, if this even makes sense, basically, a place where people can monetize or make their models accessible to others.
 
-## API Reference
+# API Reference
 
 **Base URL**: `https://non-existent-url.com/api/v1/`
+
 **Gateway PORT**: 4000
+
 **User Service PORT**: 3000
 
 ## User Service `/user`
@@ -27,7 +29,9 @@ It is not a platform to train models, or share and version control source code f
 ### Signup
 
 **Method**: `POST`
+
 **URL**: `/signup`
+
 **Body**:
 
 ```json
@@ -51,7 +55,9 @@ It is not a platform to train models, or share and version control source code f
 ### Login
 
 **Method**: `POST`
+
 **URL**: `/login`
+
 **Body**:
 
 ```json
@@ -82,24 +88,14 @@ Every error `message` can be safely wrapped in alert on client,
 but **500** will probably require something more descriptive. It's
 the kind of error that can not be revealed to the client.
 
-**NotFoundError** - 404
+**NotFoundError** - 404 - *Requesting a resource that does not exist*
 
-*Requesting a resource that does not exist*
+**ConflictError** - 409 - *Trying to create a resource that already exists*
 
-**ConflictError** - 409
+**ValidationError** - 400 - *Request body is not valid*
 
-*Trying to create a resource that already exists*
+**UnauthorizedError** - 401 - *Trying to access a protected resource without authorization*
 
-**ValidationError** - 400
-
-*Request body is not valid*
-
-**UnauthorizedError** - 401
-
-*Trying to access a protected resource without authorization*
-
-**AssertionError** - 500
-
-*Internal server error*
+**AssertionError** - 500 - *Internal server error*
 
 
