@@ -1,6 +1,6 @@
-import { lstat } from "fs";
 import authRouter from "./routers/auth.router";
 import express from "express";
+import errorMiddleware from "./middlewares/error.middleware";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,6 +17,8 @@ app.get("/health", (req, res) => {
 });
 
 app.use("/auth", authRouter);
+
+app.use(errorMiddleware);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
