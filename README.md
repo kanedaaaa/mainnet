@@ -74,6 +74,58 @@ It is not a platform to train models, or share and version control source code f
 }
 ```
 
+### Profile `/profile`
+
+### Get Profile
+
+**Method**: `GET`
+
+**URL**: `/`
+
+**Response 200**:
+
+```json
+{
+  "id": "id",
+  "username": "username",
+  "email": "email",
+  "fullname": "fullname",
+  "bio": "bio",
+  "avatar": "avatar",
+  "createdAt": "createdAt"
+}
+```
+
+### Update Profile
+
+**Method**: `PUT`
+
+**URL**: `/`
+
+**Body**:
+
+```json
+{
+  "username": "username",  // optional
+  "fullname": "fullname", // optional
+  "bio": "bio"           // optional
+}
+```
+
+**Response 200**:
+
+```json
+{
+  "id": "id",
+  "username": "username",
+  "email": "email",
+  "fullname": "fullname",
+  "bio": "bio",
+  "avatar": "avatar",
+  "createdAt": "createdAt"
+}
+```
+
 ## Error Classes
 
 Every error class comes with default object:

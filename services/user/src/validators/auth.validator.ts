@@ -27,7 +27,8 @@ async function validateAuth(method: any, input: any) {
     case "updateProfile": {
       const schema = joi.object({
         fullName: joi.string(),
-        bio: joi.string()
+        bio: joi.string(),
+        username: joi.string()
       });
 
       return await schema.validateAsync(input);
