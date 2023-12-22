@@ -1,5 +1,6 @@
 import { AuthService, ISignupPayload } from "../services/auth.service";
 import ValidateAndThrow from "../validators/auth.validator";
+import { sendPostSignup, sendEmailVerification } from "../services/internal/email.service";
 
 class AuthController extends AuthService {
     public async Signup(req: any, res: any, next: any) {
@@ -8,9 +9,14 @@ class AuthController extends AuthService {
         try {
             await ValidateAndThrow("signup", payload);
             await this.signup(payload);
+
+            // await sendPostSignup(payload.email);
+            const randomJWT = this.generateJWT(0, true);
+            // await sendEmailVerification(payload.email, randomJWT);
     
             res.status(200).json({
-                message: "User created successfully"
+                message: "User created successfully",
+                devOnly: randomJWT, // never include devonly in reference
             });
         } catch (err: any) {
             next(err);

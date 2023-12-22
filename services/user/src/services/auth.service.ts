@@ -65,14 +65,28 @@ class AuthService {
     return token;
   }
 
-  private generateJWT(id: number): string {
-    const token = jwt.sign(
-      {
-        id,
-        exp: Math.floor(Date.now() / 1000) + 60 * 60,
-      },
-      process.env.JWT_TOKEN!
-    );
+  public generateJWT(id: number, random = false): string {
+    let token: string;
+
+    if (random) {
+      token = jwt.sign(
+        {
+          iat: Math.floor(Date.now() / 1000) - 30,
+        },
+        "thisdoesntmatter"
+      );
+
+      return token;
+    } else {
+      token = jwt.sign(
+        {
+          id,
+          iat: Math.floor(Date.now() / 1000) - 30,
+          exp: Math.floor(Date.now() / 1000) + 60 * 60,
+        },
+        process.env.JWT_TOKEN!
+      );
+    }
 
     return token;
   }
