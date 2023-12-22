@@ -13,6 +13,5 @@ Sub-repo for the user service, which will handle all the user related stuff, lik
     - [ ] Password Recovery
     - [ ] Email Confirmation
 - [ ] Profile 
-    - [ ] Get Profile
-    - [ ] Update Profile
-    - [ ] Delete Profile
+    - [X] Get Profile
+    - [X] Update Profile

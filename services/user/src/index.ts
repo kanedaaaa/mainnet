@@ -1,4 +1,5 @@
 import authRouter from "./routers/auth.router";
+import profileRouter from "./routers/profile.router";
 import express from "express";
 import errorMiddleware from "./middlewares/error.middleware";
 import * as dotenv from "dotenv";
@@ -19,6 +20,7 @@ app.get("/health", (req, res) => {
 });
 
 app.use("/auth", authRouter);
+app.use("/profile", profileRouter);
 
 app.use(errorMiddleware);
 

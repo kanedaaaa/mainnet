@@ -23,6 +23,15 @@ async function validateAuth(method: any, input: any) {
 
       return await schema.validateAsync(input);
     }
+
+    case "updateProfile": {
+      const schema = joi.object({
+        fullName: joi.string(),
+        bio: joi.string()
+      });
+
+      return await schema.validateAsync(input);
+    }
   }
 }
 
