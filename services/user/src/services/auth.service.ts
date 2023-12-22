@@ -10,7 +10,7 @@ import {
 
 interface ISignupPayload {
   email: string;
-  password: string;
+  password?: string;
   username: string;
   fullName?: string;
   bio?: string;
@@ -23,7 +23,8 @@ class AuthService {
       throw new ConflictError("Email already exists");
     }
 
-    const hashedPassword = await this.hashPassword(payload.password);
+    const hashedPassword = await this.hashPassword(payload.password!);
+    delete payload.password;
 
     try {
       await prisma.user.create({

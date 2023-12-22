@@ -8,6 +8,7 @@ const errorResponseMap = new Map([
 ]);
 
 const errorMiddleware = (err: any, req: any, res: any, next: any) => {
+    console.log(err)
     const errorType = errorResponseMap.get(err.constructor);
 
     if (errorType) {

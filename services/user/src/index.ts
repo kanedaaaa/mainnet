@@ -1,6 +1,8 @@
 import authRouter from "./routers/auth.router";
 import express from "express";
 import errorMiddleware from "./middlewares/error.middleware";
+import * as dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
