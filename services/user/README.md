@@ -5,9 +5,9 @@ Sub-repo for the user service, which will handle all the user related stuff, lik
 ## TODO
 
 - [ ] Authentication
-    - [ ] Login (JWT)
+    - [X] Login (JWT)
     - [ ] Login (OAuth)
-    - [ ] Signup
+    - [X] Signup
     - [ ] Logout
 - [ ] Recovery & Confirmation
     - [ ] Password Recovery
