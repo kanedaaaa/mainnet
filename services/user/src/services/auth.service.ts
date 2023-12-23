@@ -7,6 +7,7 @@ import {
   ConflictError,
   AuthorizationError,
 } from "../handlers/error.handler";
+import redis from "../redis";
 
 interface ISignupPayload {
   email: string;
@@ -18,7 +19,7 @@ interface ISignupPayload {
 }
 
 class AuthService {
-  public async signup(payload: ISignupPayload): Promise<void> {
+  public async signup(payload: ISignupPayload): Promise<string> {
     if (await this.emailExists(payload.email)) {
       throw new ConflictError("Email already exists");
     }
@@ -34,10 +35,17 @@ class AuthService {
         },
       });
     } catch (err: any) {
-      throw new AsyncError(err.message);
+      throw new AsyncError(err.message, 500, err);
     }
 
-    return;
+    const emailVerifToken = this.generateJWT(0, true);
+    try {
+      await redis.set(emailVerifToken, payload.email, "EX", 86400); // 24 hours
+    } catch (err: any) {
+      throw new AsyncError(err.message, 500, err);
+    }
+
+    return emailVerifToken;
   }
 
   public async login(email: string, password: string): Promise<string> {
@@ -73,7 +81,7 @@ class AuthService {
         {
           iat: Math.floor(Date.now() / 1000) - 30,
         },
-        "thisdoesntmatter"
+        process.env.RANDOM_JWT_TOKEN!
       );
 
       return token;

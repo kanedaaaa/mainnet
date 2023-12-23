@@ -8,15 +8,11 @@ class AuthController extends AuthService {
     
         try {
             await ValidateAndThrow("signup", payload);
-            await this.signup(payload);
-
-            // await sendPostSignup(payload.email);
-            const randomJWT = this.generateJWT(0, true);
-            // await sendEmailVerification(payload.email, randomJWT);
+            const token = await this.signup(payload);
     
             res.status(200).json({
                 message: "User created successfully",
-                devOnly: randomJWT, // never include devonly in reference
+                devOnlyVerifToken: token
             });
         } catch (err: any) {
             next(err);
